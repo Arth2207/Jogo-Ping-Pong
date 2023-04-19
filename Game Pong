@@ -1,0 +1,82 @@
+// Variaveis Bolinha;
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 15;
+
+// Velocidade da Bolinha;
+let velocidadeyBolinha = 2;
+let velocidadexBolinha = 2;
+let raio = diametro / 2
+
+// Variaveis Raquete;
+let yRaquete = 150;
+let xRaquete = 6;
+let compRaquete = 10
+let alturaRaquete = 90
+
+// Variaveis do Oponente
+let xRaqueteOponente = 585;
+let yRaqueteOponente = 150;
+let velocidadeYOponente;
+
+function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(0);
+  tamanhoBolinha();
+  velocidadeBolinha();
+  colisaBolinha();
+  mostraRaquete(xRaquete, yRaquete);
+  movimentaMinhaRaquete();
+  verificaColisaBolinha();
+  mostraRaquete(xRaqueteOponente, yRaqueteOponente);
+  movimentoRaqueteOponente()
+}
+
+function tamanhoBolinha (){
+  circle(xBolinha, yBolinha, diametro);
+}
+
+function velocidadeBolinha(){
+  xBolinha += velocidadexBolinha;
+  yBolinha += velocidadeyBolinha;
+}
+
+function colisaBolinha(){
+  if(xBolinha + raio> width ||
+     xBolinha - raio< 0){
+    velocidadexBolinha *= -1
+  }
+  if(yBolinha + raio> height ||
+     yBolinha - raio<0){
+    velocidadeyBolinha *= -1
+  }
+}
+
+function mostraRaquete(x,y){
+  rect(x, y,compRaquete, alturaRaquete);
+}
+function movimentaMinhaRaquete(){
+ if(keyIsDown(UP_ARROW)){
+   yRaquete -= 10;
+ }
+ if(keyIsDown(DOWN_ARROW)){
+   yRaquete += 10;
+ }
+}
+
+function verificaColisaBolinha(){
+  if(xBolinha - raio < xRaquete + compRaquete &&
+     yBolinnha - raio< yRaquete +alturaRaquete &&
+     yBolinha+ raio>ete){
+    velocidadexBolinha *= -1;
+  }
+}
+
+function movimentoRaqueteOponente(){
+  velocidadeYOponente = yBolinha - yRaqueteOponente -
+  compRaquete / 2 - 30 ;
+  yRaqueteOponente += velocidadeYOponente;
+}
